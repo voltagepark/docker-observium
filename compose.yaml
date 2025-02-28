@@ -6,7 +6,7 @@ services:
     env_file:
       - .env_mysql
     volumes:
-      - db_data:/var/lib/mysql
+      - observium-db-data:/var/lib/mysql
     ports:
       - "3306:3306"
     mem_limit: 1000m
@@ -21,14 +21,28 @@ services:
     env_file:
       - .env_observium
     volumes:
-      - config:/config
-      - observium:/opt/observium
+      - observium-config:/config
+      - observium-data:/opt/observium
     ports:
       - "80:80"
     mem_limit: 1000m
     mem_reservation: 600m
 
 volumes:
-  db_data:
-  config:
-  observium:
+  observium-db-data:
+    driver_opts:
+      type: none
+      device: /mnt/netops/observability/observium/db
+      o: bind
+
+  observium-config:
+    driver_opts:
+      type: none
+      device: /mnt/netops/observability/observium/config
+      o: bind
+
+  observium-data:
+    driver_opts:
+      type: none
+      device: /mnt/netops/observability/observium/observium
+      o: bind
