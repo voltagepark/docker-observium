@@ -16,7 +16,7 @@ services:
     container_name: observium-app
     depends_on:
       - db
-    build: .
+    image: voltagepark/observium:latest
     restart: unless-stopped
     env_file:
       - .env_observium
