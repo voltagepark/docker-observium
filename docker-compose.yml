@@ -1,36 +1,34 @@
-version: '2'
-
 services:
   db:
+    container_name: observium-db
     image: mariadb:10.5.2
-    restart: always
+    restart: unless-stopped
     env_file:
       - .env_mysql
     volumes:
       - db_data:/var/lib/mysql
     ports:
-      - "3306"
+      - "3306:3306"
     mem_limit: 1000m
     mem_reservation: 300m
 
   app:
+    container_name: observium-app
     depends_on:
       - db
-    links:
-      - db:db
-    image: pvrmza/docker-observium:latest
-    restart: always
+    build: .
+    restart: unless-stopped
     env_file:
       - .env_observium
     volumes:
       - config:/config
+      - observium:/opt/observium
     ports:
       - "80:80"
     mem_limit: 1000m
     mem_reservation: 600m
 
-
 volumes:
   db_data:
   config:
-
+  observium:
