@@ -3,6 +3,13 @@
 # turn on bash's job control
 set -m
 
+if [ ! -f "/opt/observium/discovery.php" ]; then
+  echo "Checking out stable Observium susbcription version from SVN"
+  svn co --username $SVN_USERNAME --password $SVN_PASSWORD https://svn.observium.org/svn/observium/branches/stable /opt/observium
+else
+  echo "Observium directory already exists, skipping SVN checkout"
+fi
+
 #######
 # clean old pid and "fix" cron
 find /var/run/ -type f -iname \*.pid -delete

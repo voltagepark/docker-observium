@@ -25,3 +25,5 @@ TZ=America/Argentina/Mendoza
 VIRTUAL_HOST=observium.local
 VIRTUAL_PORT=80
 
+SVN_USERNAME=username
+SVN_PASSWORD=password

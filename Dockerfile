@@ -24,11 +24,7 @@ RUN a2dismod mpm_event && \
     chmod 0644 /etc/cron.d/observium && \
     chmod +x /usr/local/bin/docker-entrypoint.sh
 
-RUN cd /opt && wget -c http://www.observium.org/observium-community-latest.tar.gz &&\
-    tar zxvf observium-community-latest.tar.gz && \
-    rm -rf observium-community-latest.tar.gz
-
-VOLUME ["/config" ]
+VOLUME ["/config"]
 EXPOSE 80
 
 ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
