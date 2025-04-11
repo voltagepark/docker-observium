@@ -26,6 +26,22 @@ chown www-data:www-data /config/rrd  -R
 mkdir -p /tmp/observium_cache
 chown www-data:www-data /tmp/observium_cache -R
 
+# move voltagepark customizations
+if [ ! -d "/opt/observium/includes/definitions/mibs/voltagepark/" ]; then
+  mkdir /opt/observium/includes/definitions/mibs/voltagepark/
+fi
+if find /opt/observium-voltagepark/includes/definitions/mibs -mindepth 1 -maxdepth 1 | read; then
+  mv /opt/observium-voltagepark/includes/definitions/mibs/* /opt/observium/includes/definitions/mibs/voltagepark/
+fi
+
+if [ ! -d "/opt/observium/mibs/voltagepark/" ]; then
+  mkdir /opt/observium/mibs/voltagepark/
+fi
+if find /opt/observium-voltagepark/mibs -mindepth 1 -maxdepth 1 | read; then
+  mv /opt/observium-voltagepark/mibs/* /opt/observium/mibs/voltagepark/
+fi
+
+
 if test -v OBSERVIUM_ALLCONFIG; then
   echo "<?php" > /opt/observium/config.php
   echo $OBSERVIUM_ALLCONFIG | base64 -d >> /opt/observium/config.php

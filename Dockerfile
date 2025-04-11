@@ -16,6 +16,10 @@ COPY files/cron-observium /etc/cron.d/observium
 COPY files/supervisord.conf /etc/supervisord.conf
 COPY files/docker-entrypoint.sh /usr/local/bin/
 
+RUN mkdir /opt/observium-voltagepark
+COPY files/includes /opt/observium-voltagepark/includes
+COPY files/mibs /opt/observium-voltagepark/mibs
+
 RUN a2dismod mpm_event && \
     a2enmod mpm_prefork && \
     a2enmod php8.3 && \
