@@ -17,9 +17,11 @@ OBSERVIUM_cache__driver=auto
 #
 # you can run cron in another container
 #OBSERVIUM_DISABLECRON=true
+# Alert web url
+OBSERVIUM_web_url=http://observium01.pod.voltagepark.net
 
 #
-TZ=America/Argentina/Mendoza
+TZ=Coordinated Universal Time
 #
 # for jwilder/nginx-proxy
 VIRTUAL_HOST=observium.local
